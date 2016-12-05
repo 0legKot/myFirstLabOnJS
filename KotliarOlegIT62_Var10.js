@@ -80,18 +80,24 @@ compositors.forEach(showDiftongs);
 
 let hash = {};
 
-function getHash(item, index, ar) {
-   let cod = item.substr(-8) || item;
-   let code = '';
-   for (let i = 0; i < cod.length; i++) {
-      code += cod.charCodeAt(i).toString();
-   }
+function getCode(item) {
+  let cod = item.substr(-8) || item;
+  let code = '';
+  for (let i = 0; i < cod.length; i++) {
+     code += cod.charCodeAt(i).toString();
+  }
+  return code;
+}
+
+function createHash(item, index, ar) {
+   let code = getCode(item);
    hash[code] = item;
    text += 'HASH:' + code + ' ITEM:' + hash[code] + '\n';
 }
+//Find in hash: temp=hash[code];
 
 text += 'Хеширование композиторов:\n';
-compositors.forEach(getHash);
+compositors.forEach(createHash);
 
 function fib(n) {
    let a = 1,
